@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Events
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Events</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-item-sliding  *ngFor="let event of events; let i = index">
+      <ion-item>
+        <ion-label>
+          <h2>{{event.title}}</h2>
+        </ion-label>
+      </ion-item>
+      <ion-item-options>
+        <button (click)="callStudent(student, i)" ion-button class="call-button" icon-start>
+          <ion-icon name="call-outline"></ion-icon>
+          Call
+        </button>
+
+        <button (click)="emailStudent(student, i)" ion-button class="email-button" icon-start>
+          <ion-icon name="mail-outline"></ion-icon>
+          Email
+        </button>
+
+        <button (click)="editStudent(student, i)" ion-button class="edit-button" icon-start>
+          <ion-icon name="create"></ion-icon>
+          Edit
+        </button>
+
+        <button (click)="removeStudent(student)" ion-button class="remove-button" icon-start>
+          <ion-icon name="trash"></ion-icon>
+          Remove
+        </button>
+
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addStudent()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
