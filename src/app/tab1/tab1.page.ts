@@ -13,7 +13,7 @@ export class Tab1Page {
 
   events = [];
   errorMessage: string;
-  title = "Tutor";
+  title = "Events";
 
   constructor (
     public navCtrl: NavController,
@@ -23,7 +23,6 @@ export class Tab1Page {
     public inputDialogService: InputDialogServiceProvider,
     ) {
       this.loadEvents();
-      console.log('loaded events');
       dataService.dataChanged$.subscribe((dataChanged: boolean) => {
         this.loadEvents();
       }

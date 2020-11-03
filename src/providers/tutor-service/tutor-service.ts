@@ -45,7 +45,6 @@ export class TutorServiceProvider {
   }
 
   getEvents(): Observable<any> {
-    console.log('hi' + this.eventURL + 'api/events');
     return this.http.get(this.eventURL + 'api/events').pipe(
       map(this.extractData),
       catchError(this.handleError)
