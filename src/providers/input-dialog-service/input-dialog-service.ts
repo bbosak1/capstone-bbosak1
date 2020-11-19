@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { TutorServiceProvider } from '../../providers/tutor-service/tutor-service';
+import { EventServiceProvider } from '../../providers/event-service/event-service';
 
 @Injectable()
 export class InputDialogServiceProvider {
 
   constructor(
     public alertCtrl: AlertController,
-    public dataService: TutorServiceProvider) {
+    public dataService: EventServiceProvider) {
   }
 
   async showPrompt(student?, index?) {
@@ -56,26 +56,26 @@ export class InputDialogServiceProvider {
     await prompt.present();
   }
 
-  async showApptPrompt(appt?, index?) {
+  async showTodoPrompt(todo?, index?) {
     const prompt = await this.alertCtrl.create({
-      header: appt ? 'Edit appt' : 'Add appt',
-      message: appt ? "Please edit appt..." : "Please enter appt...",
+      header: todo ? 'Edit todo' : 'Add todo',
+      message: todo ? "Please edit todo..." : "Please enter todo...",
       inputs: [
         {
-          name: 'date',
-          placeholder: 'Date',
-          value: appt ? appt.date : null
+          name: 'descr',
+          placeholder: 'Description',
+          value: todo ? todo.descr : null
         },
         {
-          name: 'time',
-          placeholder: 'Time',
-          value: appt ? appt.time : null
+          name: 'assignee',
+          placeholder: 'Assignee',
+          value: todo ? todo.assignee : null
         },
-        {
-          name: 'name',
-          placeholder: 'Name',
-          value: appt ? appt.name : null
-        },
+        // {
+        //   name: 'name',
+        //   placeholder: 'Name',
+        //   value: todo ? todo.name : null
+        // },
       ],
       buttons: [
         {
@@ -87,12 +87,11 @@ export class InputDialogServiceProvider {
           text: 'Save',
           handler: data => {
             if (index !== undefined) {
-              appt.date = data.date;
-              appt.time = data.time;
-              appt.name = data.name;
+              todo.descr = data.descr;
+              todo.assignee = data.assignee;
             }
             else {
-              this.dataService.addAppt(data);
+              this.dataService.addTodo(data);
             }
           }
         }

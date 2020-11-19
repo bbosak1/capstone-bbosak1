@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab2Page } from './tab2.page';
-import { TutorServiceProvider } from '../../providers/tutor-service/tutor-service';
+import { EventServiceProvider } from '../../providers/event-service/event-service';
 import { InputDialogServiceProvider } from '../../providers/input-dialog-service/input-dialog-service';
 
 import { Tab2PageRoutingModule } from './tab2-routing.module';
@@ -19,7 +19,7 @@ import { CalendarModule } from 'ion2-calendar';
     CalendarModule
   ],
   providers: [
-    TutorServiceProvider,
+    EventServiceProvider,
     InputDialogServiceProvider
   ],
   declarations: [Tab2Page]

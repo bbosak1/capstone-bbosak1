@@ -6,9 +6,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable()
-export class TutorServiceProvider {
+export class EventServiceProvider {
 
   students: any = [];
+  todos: any = [];
   appts: any = [];
   blogs: any = [];
   dataChanged$: Observable<boolean>;
@@ -16,7 +17,7 @@ export class TutorServiceProvider {
   private dataChangeSubject: Subject<boolean>;
 
   eventURL = "http://localhost:8081/";
-  todoURL = "http://localhost:8082/";
+  todoURL  = "http://localhost:8082/";
 
   constructor(
     public callNumber: CallNumber,
@@ -67,13 +68,21 @@ export class TutorServiceProvider {
       });
   }
 
-  // Add Appointment
-  addAppt(appt) {
-    this.http.post(this.todoURL + "api/events", appt)
+  // Add Todo
+  addTodo(todo) {
+    this.http.post(this.todoURL + "api/todos", todo)
       .subscribe(res => {
-        this.appts = res;
+        this.todos = res;
         this.dataChangeSubject.next(true);
       })
+  }
+
+  removeTodo(todo) {
+    this.http.delete(this.todoURL + "api/todos/" + todo._id)
+    .subscribe(res => {
+      this.todos = res;
+      this.dataChangeSubject.next(true);
+    });
   }
 
   // Add Blog post
@@ -108,9 +117,9 @@ export class TutorServiceProvider {
       .catch(err => console.log('Error launching email', err));
   }
 
-  // Appointments
-  getAppts(): Observable<any> {
-    return this.http.get(this.todoURL + 'api/appts').pipe(
+  // Todos
+  getTodos(): Observable<any> {
+    return this.http.get(this.todoURL + 'api/todos').pipe(
       map(this.extractData),
       catchError(this.handleError)
     );

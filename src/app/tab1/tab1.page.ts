@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ToastController, AlertController } from '@ionic/angular';
-import { TutorServiceProvider } from '../../providers/tutor-service/tutor-service';
+import { EventServiceProvider } from '../../providers/event-service/event-service';
 import { InputDialogServiceProvider } from '../../providers/input-dialog-service/input-dialog-service';
 
 @Component({
@@ -19,7 +19,7 @@ export class Tab1Page {
     public navCtrl: NavController,
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
-    public dataService: TutorServiceProvider,
+    public dataService: EventServiceProvider,
     public inputDialogService: InputDialogServiceProvider,
     ) {
       this.loadEvents();
@@ -55,6 +55,10 @@ export class Tab1Page {
 
   addStudent() {
     this.inputDialogService.showPrompt();
+  }
+
+  removeTodo(todo) {
+    this.dataService.removeTodo(todo);
   }
 
 }

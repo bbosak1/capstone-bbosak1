@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TutorServiceProvider } from '../../providers/tutor-service/tutor-service';
+import { EventServiceProvider } from '../../providers/event-service/event-service';
 import { InputDialogServiceProvider } from '../../providers/input-dialog-service/input-dialog-service';
 
 @Component({
@@ -9,17 +9,18 @@ import { InputDialogServiceProvider } from '../../providers/input-dialog-service
 })
 export class Tab2Page {
 
-  appts = [];
+  // appts = [];
+  todos = [];
   errorMessage: string;
   show: boolean = true;
 
   constructor(
-    public dataService: TutorServiceProvider,
+    public dataService: EventServiceProvider,
     public inputDialogService: InputDialogServiceProvider,
   ) {
-    this.loadAppts();
+    this.loadTodos();
     dataService.dataChanged$.subscribe((dataChanged: boolean) => {
-      this.loadAppts();
+      this.loadTodos();
     })
   }
 
@@ -27,16 +28,20 @@ export class Tab2Page {
     console.log($event.format('MM-DD-YYYY'));
   }
 
-  loadAppts() {
-    this.dataService.getAppts()
+  loadTodos() {
+    this.dataService.getTodos()
       .subscribe (
-        appts => this.appts = appts,
+        todos => this.todos = todos,
         error => this.errorMessage = <any>error
       );
   }
 
-  addAppt() {
-    this.inputDialogService.showApptPrompt();
+  addTodo() {
+    this.inputDialogService.showTodoPrompt();
+  }
+
+  removeTodo(todo) {
+    this.dataService.removeTodo(todo);
   }
 
 }

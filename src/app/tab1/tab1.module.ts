@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
-import { TutorServiceProvider } from '../../providers/tutor-service/tutor-service';
+import { EventServiceProvider } from '../../providers/event-service/event-service';
 import { InputDialogServiceProvider } from '../../providers/input-dialog-service/input-dialog-service';
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
@@ -17,7 +17,7 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
   ],
   declarations: [Tab1Page],
   providers: [
-    TutorServiceProvider,
+    EventServiceProvider,
     InputDialogServiceProvider
   ]
 })
