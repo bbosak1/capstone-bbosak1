@@ -8,10 +8,8 @@ import { Observable, Subject } from 'rxjs';
 @Injectable()
 export class EventServiceProvider {
 
-  students: any = [];
   todos: any = [];
-  appts: any = [];
-  blogs: any = [];
+  events: any = [];
   dataChanged$: Observable<boolean>;
 
   private dataChangeSubject: Subject<boolean>;
@@ -52,18 +50,18 @@ export class EventServiceProvider {
     );
   }
 
-  removeStudent(student) {
-    this.http.delete(this.eventURL + "api/events/" + student._id)
+  removeEvent(event) {
+    this.http.delete(this.eventURL + "api/events/" + event._id)
       .subscribe(res => {
-        this.students = res;
+        this.events = res;
         this.dataChangeSubject.next(true);
       });
   }
 
-  addStudent(student) {
-    this.http.post(this.eventURL + "api/events", student)
+  addEvent(event) {
+    this.http.post(this.eventURL + "api/events", event)
       .subscribe(res => {
-        this.students = res;
+        this.events = res;
         this.dataChangeSubject.next(true);
       });
   }
@@ -85,49 +83,17 @@ export class EventServiceProvider {
     });
   }
 
-  // Add Blog post
-  addBlog(blog) {
-    this.http.post(this.todoURL + "api/blogs", blog)
+  editEvent(event, index) {
+    this.http.put(this.eventURL + "api/events/" + event._id, event)
       .subscribe(res => {
-        this.blogs = res;
-        this.dataChangeSubject.next(true);
-      })
-  }
-
-  editStudent(student, index) {
-    this.http.put(this.eventURL + "api/events/" + student._id, student)
-      .subscribe(res => {
-        this.students = res;
+        this.events = res;
         this.dataChangeSubject.next(true);
       });
-  }
-
-  callStudent(student, i) {
-    this.callNumber.callNumber(this.students.phoneNo, true)
-      .then(res => console.log('Launched dialer!', res))
-      .catch(err => console.log('Error launching dialer', err));
-  }
-
-  emailStudent(student, i) {
-    const email = {
-      to: this.students.emailAddr,
-    }
-    this.emailComposer.open(email)
-      .then(res => console.log('Launched email!', res))
-      .catch(err => console.log('Error launching email', err));
   }
 
   // Todos
   getTodos(): Observable<any> {
     return this.http.get(this.todoURL + 'api/todos').pipe(
-      map(this.extractData),
-      catchError(this.handleError)
-    );
-  }
-
-  // Blogs
-  getBlogs(): Observable<any> {
-    return this.http.get(this.todoURL + 'api/blogs').pipe(
       map(this.extractData),
       catchError(this.handleError)
     );

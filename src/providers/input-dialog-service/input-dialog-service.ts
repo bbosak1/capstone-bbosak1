@@ -10,25 +10,35 @@ export class InputDialogServiceProvider {
     public dataService: EventServiceProvider) {
   }
 
-  async showPrompt(student?, index?) {
+  async showPrompt(event?, index?) {
     const prompt = await this.alertCtrl.create({
-      header: student ? 'Edit Student' : 'Add Student',
-      message: student ? "Please edit student..." : "Please enter student...",
+      header: event ? 'Edit Event' : 'Add Event',
+      message: event ? "Please edit event..." : "Please enter event...",
       inputs: [
         {
-          name: 'name',
-          placeholder: 'Name',
-          value: student ? student.name : null
+          name: 'title',
+          placeholder: 'Title',
+          value: event ? event.title : null
         },
         {
-          name: 'phoneNo',
-          placeholder: 'Phone Number',
-          value: student ? student.phoneNo : null
+          name: 'date',
+          placeholder: 'Date',
+          value: event ? event.date : null
         },
         {
-          name: 'emailAddr',
-          placeholder: 'Email Address',
-          value: student ? student.emailAddr : null
+          name: 'timeSt',
+          placeholder: 'Start time',
+          value: event ? event.timeSt : null
+        },
+        {
+          name: 'timeEnd',
+          placeholder: 'End Time',
+          value: event ? event.timeEnd : null
+        },
+        {
+          name: 'loc',
+          placeholder: 'Location',
+          value: event ? event.loc : null
         },
       ],
       buttons: [
@@ -41,13 +51,15 @@ export class InputDialogServiceProvider {
           text: 'Save',
           handler: data => {
             if (index !== undefined) {
-              student.name = data.name;
-              student.phoneNo = data.phoneNo;
-              student.emailAddr = data.emailAddr;
-              this.dataService.editStudent(student, index);
+              event.title = data.title;
+              event.date = data.date;
+              event.timeSt = data.timeSt;
+              event.timeEnd = data.timeEnd;
+              event.loc = data.loc;
+              this.dataService.editEvent(event, index);
             }
             else {
-              this.dataService.addStudent(data);
+              this.dataService.addEvent(data);
             }
           }
         }
@@ -99,51 +111,5 @@ export class InputDialogServiceProvider {
     });
     await prompt.present();
   }
-
-  async showBlogPrompt(blog?, index?) {
-    const prompt = await this.alertCtrl.create({
-      header: blog ? 'Edit blog' : 'Add blog',
-      message: blog ? "Please edit blog..." : "Please enter blog...",
-      inputs: [
-        {
-          name: 'title',
-          placeholder: 'Title',
-          value: blog ? blog.title : null
-        },
-        {
-          name: 'shortDescr',
-          placeholder: 'Description',
-          value: blog ? blog.shortDescr : null
-        },
-        {
-          name: 'href',
-          placeholder: 'Site link',
-          value: blog ? blog.href : null
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-          }
-        },
-        {
-          text: 'Save',
-          handler: data => {
-            if (index !== undefined) {
-              blog.title = data.title;
-              blog.shortDescr = data.shortDescr;
-              blog.href = data.href;
-            }
-            else {
-              this.dataService.addBlog(data);
-            }
-          }
-        }
-      ]
-    });
-    await prompt.present();
-  }
-
 
 }

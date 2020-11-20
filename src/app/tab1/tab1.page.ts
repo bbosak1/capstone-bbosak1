@@ -37,23 +37,15 @@ export class Tab1Page {
       );
   }
 
-  removeStudent(student) {
-    this.dataService.removeStudent(student);
+  removeEvent(event) {
+    this.dataService.removeEvent(event);
   }
 
-  editStudent(student, index) {
-    this.inputDialogService.showPrompt(student, index);
+  editEvent(event, index) {
+    this.inputDialogService.showPrompt(event, index);
   }
 
-  callStudent(student, i) {
-    this.dataService.callStudent(student,i);
-  }
-
-  emailStudent(student, i) {
-    this.dataService.emailStudent(student, i);
-  }
-
-  addStudent() {
+  addEvent() {
     this.inputDialogService.showPrompt();
   }
 

@@ -21,22 +21,13 @@
         </ion-label>
       </ion-item>
       <ion-item-options>
-        <button (click)="callStudent(student, i)" ion-button class="call-button" icon-start>
-          <ion-icon name="call-outline"></ion-icon>
-          Call
-        </button>
 
-        <button (click)="emailStudent(student, i)" ion-button class="email-button" icon-start>
-          <ion-icon name="mail-outline"></ion-icon>
-          Email
-        </button>
-
-        <button (click)="editStudent(student, i)" ion-button class="edit-button" icon-start>
+        <button (click)="editEvent(event, i)" ion-button class="edit-button" icon-start>
           <ion-icon name="create"></ion-icon>
           Edit
         </button>
 
-        <button (click)="removeStudent(student)" ion-button class="remove-button" icon-start>
+        <button (click)="removeEvent(event)" ion-button class="remove-button" icon-start>
           <ion-icon name="trash"></ion-icon>
           Remove
         </button>
@@ -46,7 +37,7 @@
   </ion-list>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="addStudent()">
+    <ion-fab-button (click)="addEvent()">
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>

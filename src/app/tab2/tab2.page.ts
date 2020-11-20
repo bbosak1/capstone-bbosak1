@@ -9,7 +9,6 @@ import { InputDialogServiceProvider } from '../../providers/input-dialog-service
 })
 export class Tab2Page {
 
-  // appts = [];
   todos = [];
   errorMessage: string;
   show: boolean = true;
